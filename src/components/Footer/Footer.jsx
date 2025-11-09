@@ -8,7 +8,12 @@ const Footer = () => {
       <div className="max-w-7xl mx-auto px-6 py-10 grid grid-cols-1 md:grid-cols-3 gap-8">
         <div>
           <h2 className="text-2xl font-bold text-white mb-3 flex items-center gap-2">
-            <span>UtilityBill</span>
+            <Link to="/" className="font-bold text-xl flex items-center gap-2">
+              Utility
+              <span className="bg-gradient-to-r from-[#7A6AE0] to-[#9E8FF5] bg-clip-text text-transparent">
+                Bills
+              </span>
+            </Link>
           </h2>
           <p className="text-sm leading-relaxed">
             Manage your utility bills easily, track your payments, and never

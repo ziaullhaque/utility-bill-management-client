@@ -47,7 +47,7 @@ const Login = () => {
           />
         </div>
 
-        <div className="flex flex-1 justify-center items-center bg-gradient-to-r from-[#632EE3] via-[#7a4cf0] to-[#007bff] p-6 md:rounded-l-4xl">
+        <div className="flex flex-1 justify-center items-center bg-gradient-to-r from-[#8F7FF0] via-[#9E8FF5] to-[#C2BAFF] p-6 md:rounded-l-4xl">
           <div className="bg-white rounded-2xl shadow-lg w-full max-w-md p-8">
             <h2 className="text-3xl font-bold text-center text-gray-800 mb-4">
               Hello!
@@ -84,7 +84,7 @@ const Login = () => {
 
               <button
                 type="submit"
-                className="w-full bg-gradient-to-r from-[#632EE3] to-[#007bff] hover:bg-gradient-to-r from-[#632EE3] to-[#007bff]  hover:opacity-95 text-white py-3 rounded-full transition duration-200"
+                className="w-full bg-gradient-to-r from-[#7A6AE0] to-[#9E8FF5] hover:from-[#6957DB] hover:to-[#8C7BF0]  hover:opacity-95 text-white py-3 rounded-full transition duration-200"
               >
                 Login
               </button>
@@ -93,7 +93,7 @@ const Login = () => {
 
             <button
               onClick={handleGoogleSignIn}
-              className="btn btn-outline hover:text-white hover:opacity-95 hover:bg-gradient-to-r from-[#632EE3] to-[#007bff] w-full"
+              className="btn btn-outline hover:text-white hover:opacity-95 hover:bg-gradient-to-r from-[#7A6AE0] to-[#9E8FF5] w-full"
             >
               <img src={google} alt="" className="w-5 h-5 mr-2" />
               Sign Up with Google

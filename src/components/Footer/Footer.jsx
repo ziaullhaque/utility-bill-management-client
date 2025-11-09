@@ -26,22 +26,22 @@ const Footer = () => {
           </h3>
           <ul className="space-y-2 text-sm">
             <li>
-              <Link to="/" className="hover:text-[#007bff] transition">
+              <Link to="/" className="hover:text-[#7A6AE0] transition">
                 Home
               </Link>
             </li>
             <li>
-              <Link to="/bills" className="hover:text-[#007bff]transition">
+              <Link to="/bills" className="hover:text-[#7A6AE0]transition">
                 Bills
               </Link>
             </li>
             <li>
-              <Link to="/pay-bills" className="hover:text-[#007bff] transition">
-                My Pay Bills
+              <Link to="/pay-bills" className="hover:text-[#7A6AE0] transition">
+                My Bills
               </Link>
             </li>
             <li>
-              <Link to="/profile" className="hover:text-[#007bff] transition">
+              <Link to="/profile" className="hover:text-[#7A6AE0] transition">
                 Profile
               </Link>
             </li>
@@ -54,13 +54,13 @@ const Footer = () => {
           <p className="text-sm mb-2">Email: support@utilitybill.com</p>
           <p className="text-sm mb-3">Phone: +880 1234 567 890</p>
           <div className="flex gap-4 text-xl">
-            <a href="#" className="hover:text-[#007bff] transition">
+            <a href="#" className="hover:text-[#7A6AE0] transition">
               <FaFacebook />
             </a>
-            <a href="#" className="hover:text-[#007bff] transition">
+            <a href="#" className="hover:text-[#7A6AE0] transition">
               <FaTwitter />
             </a>
-            <a href="#" className="hover:text-[#007bff] transition">
+            <a href="#" className="hover:text-[#7A6AE0] transition">
               <FaInstagram />
             </a>
           </div>
@@ -71,7 +71,7 @@ const Footer = () => {
           © {new Date().getFullYear()}{" "}
           <span className="text-white font-semibold">UtilityBill</span>. All
           Rights Reserved. Made with by
-          <span className="text-[#007bff] font-medium ml-1 cursor-pointer">
+          <span className="text-[#7A6AE0] font-medium ml-1 cursor-pointer">
             <a target="_blank" href="https://github.com/ziaullhaque">
               Ziaull Haque
             </a>

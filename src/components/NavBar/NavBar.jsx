@@ -1,12 +1,13 @@
 import React, { useContext, useEffect, useState } from "react";
 import { GoHomeFill } from "react-icons/go";
 import { ImBoxAdd } from "react-icons/im";
-import { Link, NavLink } from "react-router";
+import { Link } from "react-router";
 import { AuthContext } from "../../contexts/AuthContext";
 import { FaSun, FaMoon } from "react-icons/fa";
 import { IoLogIn, IoLogOut } from "react-icons/io5";
 import { FaDownload, FaGear, FaUser } from "react-icons/fa6";
 import { FaUserPlus } from "react-icons/fa";
+import MyLink from "../MyLink/MyLink";
 
 const NavBar = () => {
   const { user, logout } = useContext(AuthContext);
@@ -69,19 +70,43 @@ const NavBar = () => {
             tabIndex="-1"
             className="menu menu-sm dropdown-content bg-base-100 rounded-box z-10 mt-3 w-52 p-2 shadow"
           >
-            <li>
-              <NavLink to="/">
-                <GoHomeFill />
-                Home
-              </NavLink>
-            </li>
-
-            <li>
-              <NavLink to="/bills">
-                <ImBoxAdd />
-                Bills
-              </NavLink>
-            </li>
+            {user ? (
+              <ul className="">
+                <li>
+                  <MyLink to="/">
+                    <GoHomeFill />
+                    Home
+                  </MyLink>
+                </li>
+                <li>
+                  <MyLink to="/bills">
+                    <ImBoxAdd />
+                    Bills
+                  </MyLink>
+                </li>
+                <li>
+                  <MyLink to="/bills">
+                    <ImBoxAdd />
+                    My Bills
+                  </MyLink>
+                </li>
+              </ul>
+            ) : (
+              <ul className="">
+                <li>
+                  <MyLink to="/">
+                    <GoHomeFill />
+                    Home
+                  </MyLink>
+                </li>
+                <li>
+                  <MyLink to="/bills">
+                    <ImBoxAdd />
+                    Bills
+                  </MyLink>
+                </li>
+              </ul>
+            )}
           </ul>
         </div>
         {/* logo */}
@@ -96,19 +121,44 @@ const NavBar = () => {
       {/* center */}
       <div className="navbar-center hidden lg:flex">
         <div>
-          <ul className="menu menu-horizontal px-1 gap-10">
-            <li>
-              <NavLink to="/">
-                <GoHomeFill />
-                Home
-              </NavLink>
-            </li>
-            <li>
-              <NavLink to="/bills">
-                <ImBoxAdd />
-                Bills
-              </NavLink>
-            </li>
+          <ul>
+            {user ? (
+              <ul className="menu menu-horizontal px-1 gap-10">
+                <li>
+                  <MyLink to="/">
+                    <GoHomeFill />
+                    Home
+                  </MyLink>
+                </li>
+                <li>
+                  <MyLink to="/bills">
+                    <ImBoxAdd />
+                    Bills
+                  </MyLink>
+                </li>
+                <li>
+                  <MyLink to="/bills">
+                    <ImBoxAdd />
+                    My Bills
+                  </MyLink>
+                </li>
+              </ul>
+            ) : (
+              <ul className="menu menu-horizontal px-1 gap-10">
+                <li>
+                  <MyLink to="/">
+                    <GoHomeFill />
+                    Home
+                  </MyLink>
+                </li>
+                <li>
+                  <MyLink to="/bills">
+                    <ImBoxAdd />
+                    Bills
+                  </MyLink>
+                </li>
+              </ul>
+            )}
           </ul>
         </div>
       </div>

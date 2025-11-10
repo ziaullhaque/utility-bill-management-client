@@ -5,8 +5,9 @@ import Login from "../pages/Login/Login";
 import Register from "../pages/Register/Register";
 import MyBills from "../pages/MyBills/MyBills";
 import PrivateRoute from "../Private/PrivateRoute";
-import RecentBills from "../pages/RecentBills/RecentBills";
 import Bills from "../pages/Bills/Bills";
+import BillDetails from "../pages/BillDetails/BillDetails";
+import AddBill from "../pages/AddBill/AddBill";
 
 export const router = createBrowserRouter([
   {
@@ -38,6 +39,22 @@ export const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <MyBills></MyBills>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/add-bill",
+        element: (
+          <PrivateRoute>
+            <AddBill></AddBill>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/bill-details/:id",
+        element: (
+          <PrivateRoute>
+            <BillDetails></BillDetails>
           </PrivateRoute>
         ),
       },

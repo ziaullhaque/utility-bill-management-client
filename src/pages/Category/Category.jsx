@@ -1,5 +1,6 @@
-// import React from "react";
+import React from "react";
 import { FaBolt, FaGasPump, FaTint, FaWifi } from "react-icons/fa";
+import { Link } from "react-router";
 
 const categories = [
   {
@@ -43,22 +44,29 @@ const Category = () => {
         Bill Categories
       </h2>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <Link
+        to="/add-bill"
+        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"
+      >
         {categories.map((cat) => (
           <div
             key={cat.id}
             className={`${cat.bg} rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-all duration-300`}
           >
-            <div className={`flex items-center justify-center h-40 ${cat.iconBg} text-white text-5xl`}>
+            <div
+              className={`flex items-center justify-center h-40 ${cat.iconBg} text-white text-5xl`}
+            >
               {cat.icon}
             </div>
             <div className="bg-white text-center py-6 px-4">
-              <h3 className="text-lg font-semibold text-gray-800 mb-2">{cat.name}</h3>
+              <h3 className="text-lg font-semibold text-gray-800 mb-2">
+                {cat.name}
+              </h3>
               <p className="text-gray-500 text-sm">{cat.desc}</p>
             </div>
           </div>
         ))}
-      </div>
+      </Link>
     </section>
   );
 };

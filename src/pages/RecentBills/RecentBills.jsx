@@ -85,7 +85,7 @@ const RecentBills = () => {
                 </div>
 
                 <Link
-                  to={`/bills/${bill._id}`}
+                  to={`/bill-details/${bill._id}`}
                   className="mt-6 btn w-full bg-linear-to-r from-[#7A6AE0] to-[#9E8FF5] hover:from-[#6957DB] hover:to-[#8C7BF0] text-white border-none rounded-lg hover:scale-105 transition-transform duration-300"
                 >
                   See Details

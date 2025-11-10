@@ -1,21 +1,16 @@
 import { useParams } from "react-router";
-import {
-  FaMapMarkerAlt,
-  FaCalendarAlt,
-  FaTag,
-  FaMoneyBillWave,
-} from "react-icons/fa";
-import { useContext, useEffect, useState } from "react";
+import { FaMapMarkerAlt, FaCalendarAlt, FaTag, FaMoneyBillWave } from "react-icons/fa";
+import {  useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../contexts/AuthContext";
 
 const BillDetails = () => {
-  const { id } = useParams(); 
+  const { id } = useParams(); // bill id from URL
   const { user } = useContext(AuthContext);
   const [bill, setBill] = useState(null);
   const [isCurrentMonth, setIsCurrentMonth] = useState(false);
 
   useEffect(() => {
-    
+    // Fetch single bill data from server
     fetch(`http://localhost:3000/bills/${id}`)
       .then((res) => res.json())
       .then((data) => {
@@ -25,7 +20,7 @@ const BillDetails = () => {
       .catch((err) => console.error("Error fetching bill details:", err));
   }, [id]);
 
-
+  // Check if the bill date is in current month
   const checkCurrentMonth = (billDate) => {
     const billMonth = new Date(billDate).getMonth();
     const currentMonth = new Date().getMonth();
@@ -40,7 +35,7 @@ const BillDetails = () => {
   };
 
   const handlePay = () => {
-    alert(`💰 Paying bill: ${bill.title} (${bill.amount}৳)`);
+    alert(`Paying bill: ${bill.title} (${bill.amount}৳)`);
   };
 
   if (!bill) {
@@ -109,7 +104,7 @@ const BillDetails = () => {
                   Pay Bill
                 </button>
                 <p className="text-red-500 mt-3 text-sm">
-                  Only current month bills can be paid.
+                   Only current month bills can be paid.
                 </p>
               </div>
             )}

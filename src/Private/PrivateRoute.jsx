@@ -1,14 +1,3 @@
-// import React from 'react';
-
-// const PrivateRoute = () => {
-//     return (
-//       <div>
-//         <h3>PrivateRoute </h3>
-//       </div>
-//     );
-// };
-
-// export default PrivateRoute;
 import React, { useContext } from "react";
 import { Navigate, useLocation } from "react-router";
 import { FadeLoader } from "react-spinners";
@@ -23,7 +12,7 @@ const PrivateRoute = ({ children }) => {
     return (
       <div className="h-screen flex items-center justify-center">
         <FadeLoader color="#31917d" />
-        <span className="loading loading-spinner text-primary"></span>
+        {/* <span className="loading loading-spinner text-primary"></span> */}
       </div>
     );
   }

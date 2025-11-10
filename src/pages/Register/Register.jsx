@@ -1,13 +1,18 @@
-import React, { useContext } from "react";
-import { Link } from "react-router";
+import React, { useContext, useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router";
 import { AuthContext } from "../../contexts/AuthContext";
 import google from "../../assets/icon-google.png";
+import { FaEye } from "react-icons/fa";
+import { IoEyeOff } from "react-icons/io5";
+import Swal from "sweetalert2";
 
 const Register = () => {
-  const { register, signInWithGoogle } = useContext(AuthContext);
-  // const navigate = useNavigate();
-  // const location = useLocation();
-  // const from = location.state?.from?.pathname || "/";
+  const [show, setShow] = useState(false);
+  const { register, signInWithGoogle, setLoading, setUser } =
+    useContext(AuthContext);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
 
   const handleRegister = (e) => {
     e.preventDefault();
@@ -15,12 +20,31 @@ const Register = () => {
     const email = e.target.email.value;
     const password = e.target.password.value;
 
+    if (password.length < 6) {
+      Swal.fire({
+        icon: "warning",
+        title: "Password must be at least 6 characters!",
+      });
+      return;
+    }
+
     register(email, password)
       .then((result) => {
         console.log(result);
+        Swal.fire({
+          title: "Registration Successful!",
+          icon: "success",
+          draggable: true,
+        });
+        navigate(from, { replace: true });
       })
       .catch((error) => {
         console.error("Registration failed:", error);
+        Swal.fire({
+          icon: "error",
+          title: "Registration Failed!",
+          text: error.message,
+        });
       });
   };
 
@@ -44,10 +68,23 @@ const Register = () => {
   const handleGoogleSignIn = () => {
     signInWithGoogle()
       .then((result) => {
+        setLoading(false);
         console.log(result);
+        setUser(result.user);
+        navigate(from);
+        Swal.fire({
+          title: "Google Sign in Successful!",
+          icon: "success",
+          draggable: true,
+        });
       })
       .catch((error) => {
         console.error("Google Sign In failed:", error);
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: error.message,
+        });
       });
   };
   // const newUser = {
@@ -76,7 +113,7 @@ const Register = () => {
             className="max-w-[80%] h-auto object-contain"
           />
         </div>
-        <div className="flex flex-1 justify-center items-center bg-linear-to-r from-[#8F7FF0] via-[#9E8FF5] to-[#C2BAFF] p-6 md:rounded-l-4xl">
+        <div className="flex flex-1 justify-center items-center bg-linear-to-r from-[#8F7FF0] via-[#9E8FF5] to-[#C2BAFF] p-6 md:rounded-l-4xl mt-16">
           <div className="bg-white rounded-2xl shadow-lg w-full max-w-md p-8">
             <h2 className="text-3xl font-bold text-center text-gray-800 mb-4">
               Welcome!
@@ -110,22 +147,28 @@ const Register = () => {
                   className="w-full px-4 py-3 border rounded-full focus:outline-none focus:ring-2 focus:ring-blue-400"
                 />
               </div>
-              <div>
+              <div className="relative">
                 {/* <label className="label">
                   <span className="label-text">Password</span>
                 </label> */}
                 <input
                   required
-                  type="password"
+                  type={show ? "text" : "password"}
                   name="password"
                   placeholder="••••••••"
                   className="w-full px-4 py-3 border rounded-full focus:outline-none focus:ring-2 focus:ring-blue-400"
                 />
+                <span
+                  onClick={() => setShow(!show)}
+                  className="absolute right-[15px] top-[16px] cursor-pointer z-50"
+                >
+                  {show ? <FaEye /> : <IoEyeOff />}
+                </span>
               </div>
 
               <button
                 type="submit"
-                className="w-full bg-linear-to-r from-[#7A6AE0] to-[#9E8FF5] hover:from-[#6957DB] hover:to-[#8C7BF0]   hover:opacity-95 text-white py-3 rounded-full transition duration-200"
+                className="w-full bg-linear-to-r from-[#7A6AE0] to-[#9E8FF5] hover:from-[#6957DB] hover:to-[#8C7BF0]   hover:opacity-95 text-white py-3 rounded-full transition duration-200 cursor-pointer"
               >
                 Register
               </button>

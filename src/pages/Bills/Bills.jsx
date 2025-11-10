@@ -19,7 +19,7 @@ const Bills = () => {
       .catch((err) => console.error("Error fetching bills:", err));
   }, []);
 
-  // Category Icon chooser
+  // category icon
   const getCategoryIcon = (category) => {
     switch (category.toLowerCase()) {
       case "electricity":
@@ -36,7 +36,7 @@ const Bills = () => {
   };
 
   return (
-    <section className="py-16 px-6 lg:px-20">
+    <section className="py-16 px-6 lg:px-20 mt-10">
       <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-800 mb-10">
         Bills
       </h2>

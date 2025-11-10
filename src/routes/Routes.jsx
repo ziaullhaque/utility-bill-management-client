@@ -26,10 +26,6 @@ export const router = createBrowserRouter([
         path: "/register",
         Component: Register,
       },
-      // {
-      //   path: "/recent-bills",
-      //   Component: RecentBills,
-      // },
       {
         path: "/bills",
         Component: Bills,

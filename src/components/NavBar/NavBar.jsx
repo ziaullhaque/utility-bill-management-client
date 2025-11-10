@@ -217,7 +217,7 @@ const NavBar = () => {
                 <li className="text-sm font-bold">{user.displayName}</li>
                 <li className="text-xs">{user.email}</li>
               </div>
-              <li className="mt-3">
+              {/* <li className="mt-3">
                 <Link to={"/profile"}>
                   <FaUser /> Profile
                 </Link>
@@ -232,7 +232,7 @@ const NavBar = () => {
                 <a>
                   <FaGear /> Settings
                 </a>
-              </li>
+              </li> */}
               <li>
                 <button
                   onClick={handleSignOut}

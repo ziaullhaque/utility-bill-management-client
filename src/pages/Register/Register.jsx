@@ -14,19 +14,25 @@ const Register = () => {
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
 
+
+ 
+
   const handleRegister = (e) => {
     e.preventDefault();
     // const name = e.target.name.value;
     const email = e.target.email.value;
     const password = e.target.password.value;
 
-    if (password.length < 6) {
-      Swal.fire({
-        icon: "warning",
-        title: "Password must be at least 6 characters!",
-      });
-      return;
-    }
+     const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
+
+     if (!passwordRegex.test(password)) {
+       Swal.fire({
+         icon: "error",
+         title: "Oops...",
+         text: "Password must be at least 6 characters long, include uppercase, lowercase, number, and special character !",
+       });
+       return
+     }
 
     register(email, password)
       .then((result) => {

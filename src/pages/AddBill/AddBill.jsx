@@ -1,25 +1,28 @@
-import React, { useState } from "react";
+import React, { use } from "react";
 import Swal from "sweetalert2";
 import { motion } from "framer-motion";
+import { AuthContext } from "../../contexts/AuthContext";
 
 const AddBill = () => {
-  const [formData, setFormData] = useState({
-    title: "",
-    category: "",
-    amount: "",
-    location: "",
-    description: "",
-    image: "",
-    date: "",
-  });
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
+  const { user } = use(AuthContext);
+  console.log(user);
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const formData = {
+      title: e.target.title.value,
+      category: e.target.category.value,
+      amount: e.target.amount.value,
+      location: e.target.location.value,
+      image: e.target.image.value,
+      date: e.target.date.value,
+      description: e.target.description.value,
+      created_at: new Date(),
+      email: user.email,
+
+    };
+
+    console.log(formData);
 
     fetch("http://localhost:3000/bills", {
       method: "POST",
@@ -36,15 +39,6 @@ const AddBill = () => {
           text: "Your new bill has been saved to the database.",
           showConfirmButton: false,
           timer: 2000,
-        });
-        setFormData({
-          title: "",
-          category: "",
-          amount: "",
-          location: "",
-          description: "",
-          image: "",
-          date: "",
         });
       })
       .catch(() => {
@@ -77,8 +71,8 @@ const AddBill = () => {
             <input
               type="text"
               name="title"
-              value={formData.title}
-              onChange={handleChange}
+              // value={formData.title}
+              // onChange={handleChange}
               required
               placeholder="Enter bill title"
               className="input input-bordered w-full"
@@ -92,8 +86,8 @@ const AddBill = () => {
             </label>
             <select
               name="category"
-              value={formData.category}
-              onChange={handleChange}
+              // value={formData.category}
+              // onChange={handleChange}
               required
               className="select select-bordered w-full"
             >
@@ -113,8 +107,8 @@ const AddBill = () => {
             <input
               type="number"
               name="amount"
-              value={formData.amount}
-              onChange={handleChange}
+              // value={formData.amount}
+              // onChange={handleChange}
               required
               placeholder="Enter amount"
               className="input input-bordered w-full"
@@ -129,8 +123,8 @@ const AddBill = () => {
             <input
               type="text"
               name="location"
-              value={formData.location}
-              onChange={handleChange}
+              // value={formData.location}
+              // onChange={handleChange}
               required
               placeholder="Enter location"
               className="input input-bordered w-full"
@@ -145,9 +139,9 @@ const AddBill = () => {
             <input
               type="url"
               name="image"
-              value={formData.image}
-              onChange={handleChange}
-              required
+              // value={formData.image}
+              // onChange={handleChange}
+              // required
               placeholder="Paste image link"
               className="input input-bordered w-full"
             />
@@ -161,8 +155,8 @@ const AddBill = () => {
             <input
               type="date"
               name="date"
-              value={formData.date}
-              onChange={handleChange}
+              // value={formData.date}
+              // onChange={handleChange}
               required
               className="input input-bordered w-full"
             />
@@ -175,8 +169,8 @@ const AddBill = () => {
             </label>
             <textarea
               name="description"
-              value={formData.description}
-              onChange={handleChange}
+              // value={formData.description}
+              // onChange={handleChange}
               required
               placeholder="Write a short description..."
               className="textarea textarea-bordered w-full h-28"

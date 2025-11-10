@@ -11,7 +11,7 @@ const PrivateRoute = ({ children }) => {
   if (loading) {
     return (
       <div className="h-screen flex items-center justify-center">
-        <FadeLoader color="#31917d" />
+        <FadeLoader color="[#7A6AE0" />
         {/* <span className="loading loading-spinner text-primary"></span> */}
       </div>
     );

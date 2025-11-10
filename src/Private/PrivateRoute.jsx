@@ -1,11 +1,38 @@
-import React from 'react';
+// import React from 'react';
 
-const PrivateRoute = () => {
+// const PrivateRoute = () => {
+//     return (
+//       <div>
+//         <h3>PrivateRoute </h3>
+//       </div>
+//     );
+// };
+
+// export default PrivateRoute;
+import React, { useContext } from "react";
+import { Navigate, useLocation } from "react-router";
+import { FadeLoader } from "react-spinners";
+import { AuthContext } from "../contexts/AuthContext";
+
+
+const PrivateRoute = ({ children }) => {
+  const { user, loading } = useContext(AuthContext);
+  const location = useLocation();
+
+  if (loading) {
     return (
-      <div>
-        <h3>PrivateRoute </h3>
+      <div className="h-screen flex items-center justify-center">
+        <FadeLoader color="#31917d" />
+        <span className="loading loading-spinner text-primary"></span>
       </div>
     );
+  }
+
+  if (!user) {
+    return <Navigate to="/login" state={{ from: location }} replace />;
+  }
+
+  return children;
 };
 
 export default PrivateRoute;

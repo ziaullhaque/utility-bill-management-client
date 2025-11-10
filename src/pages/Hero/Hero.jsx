@@ -28,9 +28,9 @@ const Hero = () => {
   }
 
   return (
-    <div className="relative w-full overflow-hidden rounded-lg mt-16 bg-gradient-to-r from-[#8F7FF0] via-[#9E8FF5] to-[#C2BAFF]">
+    <div className="relative w-full overflow-hidden rounded-lg mt-16 bg-linear-to-r from-[#8F7FF0] via-[#9E8FF5] to-[#C2BAFF]">
       <div
-        className="flex transition-transform duration-[3000ms] ease-in-out"
+        className="flex transition-transform duration-3000 ease-in-out"
         style={{ transform: `translateX(-${current * 100}%)` }}
       >
         {slides.map((slide, index) => (
@@ -44,7 +44,7 @@ const Hero = () => {
                   <p className="text-lg text-gray-100 max-w-xl mx-auto lg:mx-0">
                     {slide.description}
                   </p>
-                  <button className="btn bg-gradient-to-r from-[#7A6AE0] to-[#9E8FF5] hover:from-[#6957DB] hover:to-[#8C7BF0] text-white px-8 py-3 rounded-lg font-semibold shadow-md">
+                  <button className="btn bg-linear-to-r from-[#7A6AE0] to-[#9E8FF5] hover:from-[#6957DB] hover:to-[#8C7BF0] text-white px-8 py-3 rounded-lg font-semibold shadow-md">
                     {slide.buttonText}
                   </button>
                 </div>

@@ -85,7 +85,7 @@ const NavBar = () => {
                   </MyLink>
                 </li>
                 <li>
-                  <MyLink to="/bills">
+                  <MyLink to="/my-bills">
                     <ImBoxAdd />
                     My Bills
                   </MyLink>
@@ -137,7 +137,7 @@ const NavBar = () => {
                   </MyLink>
                 </li>
                 <li>
-                  <MyLink to="/bills">
+                  <MyLink to="/my-bills">
                     <ImBoxAdd />
                     My Bills
                   </MyLink>

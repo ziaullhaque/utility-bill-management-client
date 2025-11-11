@@ -1,10 +1,10 @@
-import React, { use } from "react";
+import React, { useContext } from "react";
 import Swal from "sweetalert2";
 import { motion } from "framer-motion";
 import { AuthContext } from "../../contexts/AuthContext";
 
 const AddBill = () => {
-  const { user } = use(AuthContext);
+  const { user } = useContext(AuthContext);
   console.log(user);
 
   const handleSubmit = (e) => {
@@ -18,13 +18,12 @@ const AddBill = () => {
       date: e.target.date.value,
       description: e.target.description.value,
       created_at: new Date(),
-      email: user.email,
-
+      email: user?.email || "unknown@gmail.com",
     };
 
     console.log(formData);
 
-    fetch("http://localhost:3000/bills", {
+    fetch("https://utility-bill-management.vercel.app/bills", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -63,7 +62,7 @@ const AddBill = () => {
         </h1>
 
         <form onSubmit={handleSubmit} className="space-y-6">
-          {/* Title */}
+          {/* title */}
           <div>
             <label className="block font-semibold mb-2 text-gray-700">
               Bill Title
@@ -71,23 +70,19 @@ const AddBill = () => {
             <input
               type="text"
               name="title"
-              // value={formData.title}
-              // onChange={handleChange}
               required
               placeholder="Enter bill title"
               className="input input-bordered w-full"
             />
           </div>
 
-          {/* Category */}
+          {/* category */}
           <div>
             <label className="block font-semibold mb-2 text-gray-700">
               Category
             </label>
             <select
               name="category"
-              // value={formData.category}
-              // onChange={handleChange}
               required
               className="select select-bordered w-full"
             >
@@ -99,7 +94,7 @@ const AddBill = () => {
             </select>
           </div>
 
-          {/* Amount */}
+          {/* amount */}
           <div>
             <label className="block font-semibold mb-2 text-gray-700">
               Amount (৳)
@@ -107,15 +102,13 @@ const AddBill = () => {
             <input
               type="number"
               name="amount"
-              // value={formData.amount}
-              // onChange={handleChange}
               required
               placeholder="Enter amount"
               className="input input-bordered w-full"
             />
           </div>
 
-          {/* Location */}
+          {/* location */}
           <div>
             <label className="block font-semibold mb-2 text-gray-700">
               Location
@@ -123,15 +116,27 @@ const AddBill = () => {
             <input
               type="text"
               name="location"
-              // value={formData.location}
-              // onChange={handleChange}
               required
               placeholder="Enter location"
               className="input input-bordered w-full"
             />
           </div>
+          {/* email */}
+          <div>
+            <label className="block font-semibold mb-2 text-gray-700">
+              Email
+            </label>
+            <input
+              type="email"
+              name="email"
+              value={user?.email || ""}
+              readOnly
+              placeholder="Email"
+              className="input input-bordered w-full"
+            />
+          </div>
 
-          {/* Image URL */}
+          {/* image URL */}
           <div>
             <label className="block font-semibold mb-2 text-gray-700">
               Image URL
@@ -139,15 +144,13 @@ const AddBill = () => {
             <input
               type="url"
               name="image"
-              // value={formData.image}
-              // onChange={handleChange}
               // required
               placeholder="Paste image link"
               className="input input-bordered w-full"
             />
           </div>
 
-          {/* Date */}
+          {/* date */}
           <div>
             <label className="block font-semibold mb-2 text-gray-700">
               Bill Date
@@ -155,29 +158,25 @@ const AddBill = () => {
             <input
               type="date"
               name="date"
-              // value={formData.date}
-              // onChange={handleChange}
               required
               className="input input-bordered w-full"
             />
           </div>
 
-          {/* Description */}
+          {/* description */}
           <div>
             <label className="block font-semibold mb-2 text-gray-700">
               Description
             </label>
             <textarea
               name="description"
-              // value={formData.description}
-              // onChange={handleChange}
               required
               placeholder="Write a short description..."
               className="textarea textarea-bordered w-full h-28"
             ></textarea>
           </div>
 
-          {/* Submit Button */}
+          {/* submit button */}
           <div className="text-center pt-4">
             <button
               type="submit"

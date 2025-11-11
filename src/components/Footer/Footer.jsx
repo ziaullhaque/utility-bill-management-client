@@ -10,7 +10,7 @@ const Footer = () => {
           <h2 className="text-2xl font-bold text-white mb-3 flex items-center gap-2">
             <Link to="/" className="font-bold text-xl flex items-center gap-2">
               Utility
-              <span className="bg-gradient-to-r from-[#7A6AE0] to-[#9E8FF5] bg-clip-text text-transparent">
+              <span className="bg-linear-to-r from-[#7A6AE0] to-[#9E8FF5] bg-clip-text text-transparent">
                 Bills
               </span>
             </Link>

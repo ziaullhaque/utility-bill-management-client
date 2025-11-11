@@ -71,13 +71,13 @@ const Hero = () => {
           onClick={() =>
             setCurrent((prev) => (prev - 1 + slides.length) % slides.length)
           }
-          className="btn btn-circle bg-gradient-to-r from-[#7A6AE0] to-[#9E8FF5] border-none text-white"
+          className="btn btn-circle bg-linear-to-r from-[#7A6AE0] to-[#9E8FF5] border-none text-white"
         >
           ❮
         </button>
         <button
           onClick={() => setCurrent((prev) => (prev + 1) % slides.length)}
-          className="btn btn-circle bg-gradient-to-l from-[#7A6AE0] to-[#9E8FF5] border-none text-white"
+          className="btn btn-circle bg-linear-to-l from-[#7A6AE0] to-[#9E8FF5] border-none text-white"
         >
           ❯
         </button>

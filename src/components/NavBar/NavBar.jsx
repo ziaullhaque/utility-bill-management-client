@@ -90,6 +90,12 @@ const NavBar = () => {
                     My Bills
                   </MyLink>
                 </li>
+                <li>
+                  <MyLink to="/add-bill">
+                    <ImBoxAdd />
+                    Add Bill
+                  </MyLink>
+                </li>
               </ul>
             ) : (
               <ul className="">
@@ -140,6 +146,12 @@ const NavBar = () => {
                   <MyLink to="/my-bills">
                     <ImBoxAdd />
                     My Bills
+                  </MyLink>
+                </li>
+                <li>
+                  <MyLink to="/add-bill">
+                    <ImBoxAdd />
+                    Add Bill
                   </MyLink>
                 </li>
               </ul>

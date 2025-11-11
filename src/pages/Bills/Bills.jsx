@@ -6,16 +6,21 @@ import {
   FaBolt,
   FaGasPump,
   FaTint,
+  FaWifi,
 } from "react-icons/fa";
-import { MdPayments } from "react-icons/md";
 
 const Bills = () => {
   const [bills, setBills] = useState([]);
+  const [filteredBills, setFilteredBills] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState("");
 
   useEffect(() => {
-    fetch("http://localhost:3000/bills")
+    fetch("https://utility-bill-management.vercel.app/bills")
       .then((res) => res.json())
-      .then((data) => setBills(data))
+      .then((data) => {
+        setBills(data);
+        setFilteredBills(data);
+      })
       .catch((err) => console.error("Error fetching bills:", err));
   }, []);
 
@@ -28,26 +33,64 @@ const Bills = () => {
         return <FaGasPump className="text-orange-500 text-xl" />;
       case "water":
         return <FaTint className="text-blue-500 text-xl" />;
-      case "payment":
-        return <MdPayments className="text-green-500 text-xl" />;
+      case "internet":
+        return <FaWifi className="text-sky-500 text-xl" />;
       default:
         return <FaBolt className="text-gray-500 text-xl" />;
+    }
+  };
+
+  // handle category change
+  const handleCategoryChange = (e) => {
+    const category = e.target.value;
+    setSelectedCategory(category);
+
+    if (category === "") {
+      // show all
+      setFilteredBills(bills);
+    } else {
+      // filter by category
+      const filtered = bills.filter(
+        (bill) => bill.category.toLowerCase() === category.toLowerCase()
+      );
+      setFilteredBills(filtered);
     }
   };
 
   return (
     <section className="py-16 px-6 lg:px-20 mt-10">
       <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-800 mb-10">
-        Bills
+        Explore All Utility Bills
       </h2>
 
+      {/* category filter */}
+      <div className="max-w-xs mx-auto mb-10">
+        <select
+          name="category"
+          value={selectedCategory}
+          onChange={handleCategoryChange}
+          className="select select-bordered w-full bg-white shadow"
+        >
+          <option value="">All Categories</option>
+          <option value="Electricity">Electricity</option>
+          <option value="Gas">Gas</option>
+          <option value="Water">Water</option>
+          <option value="Internet">Internet</option>
+        </select>
+      </div>
+
+      {/* loader */}
       {bills.length === 0 ? (
         <p className="flex items-center justify-center py-20">
           <span className="loading loading-bars loading-xl"></span>
         </p>
+      ) : filteredBills.length === 0 ? (
+        <p className="text-center text-gray-600 text-lg">
+          No bills found for this category.
+        </p>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          {bills.map((bill) => (
+          {filteredBills.map((bill) => (
             <div
               key={bill._id}
               className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden group"

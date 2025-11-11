@@ -18,9 +18,9 @@ const BillDetails = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { user } = useContext(AuthContext);
 
-  //  Fetch single bill data
+  //  fetch single bill data
   useEffect(() => {
-    fetch(`http://localhost:3000/bills/${id}`)
+    fetch(`https://utility-bill-management.vercel.app/bills/${id}`)
       .then((res) => res.json())
       .then((data) => {
         if (data?.success && data?.result) {
@@ -36,7 +36,7 @@ const BillDetails = () => {
       });
   }, [id]);
 
-  //  Check if bill belongs to current month
+  //  check current month
   const checkCurrentMonth = (billDate) => {
     const billMonth = new Date(billDate).getMonth();
     const billYear = new Date(billDate).getFullYear();
@@ -45,7 +45,7 @@ const BillDetails = () => {
     setIsCurrentMonth(billMonth === currentMonth && billYear === currentYear);
   };
 
-  //  Handle Pay Submit
+  //  handle pay
   const handlePaySubmit = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -71,7 +71,7 @@ const BillDetails = () => {
       info: form.info.value,
     };
 
-    fetch("http://localhost:3000/payments", {
+    fetch("https://utility-bill-management.vercel.app/payments", {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify(paymentInfo),
@@ -95,50 +95,50 @@ const BillDetails = () => {
       );
   };
 
-  //  Handle Update Submit
-  const handleUpdateBill = (e) => {
-    e.preventDefault();
-    const form = e.target;
-    const updatedBill = {
-      title: form.title.value,
-      description: form.description.value,
-      amount: form.amount.value,
-    };
+  //  handle update
+  // const handleUpdateBill = (e) => {
+  //   e.preventDefault();
+  //   const form = e.target;
+  //   const updatedBill = {
+  //     title: form.title.value,
+  //     description: form.description.value,
+  //     amount: form.amount.value,
+  //   };
 
-    fetch(`http://localhost:3000/bills/${bill._id}`, {
-      method: "PUT",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify(updatedBill),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.modifiedCount > 0 || data.success) {
-          Swal.fire({
-            title: "Updated!",
-            text: "Bill information has been updated successfully.",
-            icon: "success",
-            confirmButtonColor: "#4B1CCB",
-          });
-          setBill({ ...bill, ...updatedBill });
-          setIsModalOpen(false);
-        } else {
-          Swal.fire({
-            icon: "warning",
-            title: "No Changes Detected!",
-            text: "You didn’t modify anything.",
-          });
-        }
-      })
-      .catch(() =>
-        Swal.fire({
-          icon: "error",
-          title: "Update Failed!",
-          text: "Something went wrong. Please try again later.",
-        })
-      );
-  };
+  //   fetch(`https://utility-bill-management.vercel.app/bills/${bill._id}`, {
+  //     method: "PUT",
+  //     headers: { "content-type": "application/json" },
+  //     body: JSON.stringify(updatedBill),
+  //   })
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       if (data.modifiedCount > 0 || data.success) {
+  //         Swal.fire({
+  //           title: "Updated!",
+  //           text: "Bill information has been updated successfully.",
+  //           icon: "success",
+  //           confirmButtonColor: "#4B1CCB",
+  //         });
+  //         setBill({ ...bill, ...updatedBill });
+  //         setIsModalOpen(false);
+  //       } else {
+  //         Swal.fire({
+  //           icon: "warning",
+  //           title: "No Changes Detected!",
+  //           text: "You didn’t modify anything.",
+  //         });
+  //       }
+  //     })
+  //     .catch(() =>
+  //       Swal.fire({
+  //         icon: "error",
+  //         title: "Update Failed!",
+  //         text: "Something went wrong. Please try again later.",
+  //       })
+  //     );
+  // };
 
-  //  Loading state
+  //  loading state
   if (!bill && !error) {
     return (
       <p className="flex items-center justify-center h-screen">
@@ -147,7 +147,7 @@ const BillDetails = () => {
     );
   }
 
-  //  Error state
+  //  error state
   if (error) {
     return (
       <div className="text-center mt-32 text-red-500 text-lg">
@@ -156,11 +156,11 @@ const BillDetails = () => {
     );
   }
 
-  //  UI Layout
   return (
     <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-10 py-20">
-      <div className="bg-base-100 rounded-2xl shadow-lg overflow-hidden transition-transform duration-300 hover:scale-[1.01]">
-        {/* Image */}
+      <div className="bg-base-100 rounded-2xl shadow-lg overflow-hidden ">
+        {/* transition-transform duration-300 hover:scale-[1.01] */}
+        {/* image */}
         <img
           src={bill.image || "https://i.ibb.co/q7LsWQx/default-bill.jpg"}
           alt={bill.title}
@@ -185,7 +185,10 @@ const BillDetails = () => {
             </p>
           </div>
 
-          <p className="text-gray-600 leading-relaxed">{bill.description}</p>
+          <p className="text-gray-600 leading-relaxed">
+            <span className="font-bold mr-1">Description :</span>
+            {bill.description}
+          </p>
 
           <div className="flex items-center justify-between bg-base-200 p-4 rounded-lg">
             <div className="flex items-center gap-2 text-lg font-semibold">
@@ -215,17 +218,17 @@ const BillDetails = () => {
                 </p>
               </div>
             )}
-            <button
+            {/* <button
               onClick={() => setIsModalOpen("update")}
               className="btn ml-4 bg-[#4B1CCB] text-white"
             >
               Update
-            </button>
+            </button> */}
           </div>
         </div>
       </div>
 
-      {/*  Pay Modal */}
+      {/*  pay modal */}
       {isModalOpen === "pay" && (
         <dialog open className="modal modal-open">
           <div className="modal-box max-w-lg w-full">
@@ -304,7 +307,7 @@ const BillDetails = () => {
       )}
 
       {/*  Update Modal */}
-      {isModalOpen === "update" && (
+      {/* {isModalOpen === "update" && (
         <dialog open className="modal modal-open">
           <div className="modal-box max-w-lg w-full">
             <h3 className="font-bold text-2xl text-center text-[#4B1CCB] mb-5">
@@ -346,7 +349,7 @@ const BillDetails = () => {
             </form>
           </div>
         </dialog>
-      )}
+      )} */}
     </div>
   );
 };

@@ -9,11 +9,15 @@ import Bills from "../pages/Bills/Bills";
 import BillDetails from "../pages/BillDetails/BillDetails";
 import AddBill from "../pages/AddBill/AddBill";
 import Profile from "../pages/Profile/Profile";
+import Error from "../pages/Error/Error";
+import About from "../pages/About/About";
+import Help from "../pages/Help/Help";
 
 export const router = createBrowserRouter([
   {
     path: "/",
     Component: RootLayouts,
+    errorElement: <Error></Error>,
     children: [
       {
         index: true,
@@ -30,6 +34,14 @@ export const router = createBrowserRouter([
       {
         path: "/bills",
         Component: Bills,
+      },
+      {
+        path: "/about",
+        Component: About,
+      },
+      {
+        path: "/help",
+        Component: Help,
       },
       {
         path: "/my-bills",

@@ -36,7 +36,7 @@ const MyBills = () => {
 
     doc.setFontSize(12);
     doc.text(`Bill ID: ${bill.billId || "N/A"}`, 20, 40);
-    doc.text(`Bill Title: ${bill.billTitle || "Utility Bill"}`, 20, 50);
+    // doc.text(`Bill Title: ${bill.billTitle || "Utility Bill"}`, 20, 50);
     doc.text(`Amount: ${bill.amount} `, 20, 60);
     doc.text(`Date: ${new Date(bill.date).toLocaleDateString()}`, 20, 70);
     doc.text(`Username: ${bill.username || "N/A"}`, 20, 80);
@@ -204,7 +204,7 @@ const MyBills = () => {
     const rows = payments.map((b, i) => [
       i + 1,
       b.billId || "N/A",
-      b.billTitle || b.title || "Utility Bill",
+      // b.billTitle || b.title || "Utility Bill",
       b.username || "N/A",
       b.phone || "N/A",
       b.amount || "N/A",
@@ -261,7 +261,7 @@ const MyBills = () => {
 
   return (
     <div className="max-w-7xl mx-auto px-4 md:px-8 py-10 mt-20">
-      <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-800 mb-10">
+      <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-800 dark:text-gray-100 mb-10">
         My Pay Bills
       </h2>
 
@@ -288,7 +288,7 @@ const MyBills = () => {
             <tr className="text-sm text-gray-700">
               <th>#</th>
               {/* <th>Bill ID</th> */}
-              <th>Title</th>
+              {/* <th>Title</th> */}
               <th>Username</th>
               <th>Phone</th>
               <th>Email</th>
@@ -304,7 +304,7 @@ const MyBills = () => {
               <tr key={bill._id} className="hover:bg-base-200 transition-all">
                 <td>{i + 1}</td>
                 {/* <td>{bill.billId || "N/A"}</td> */}
-                <td>{bill.billTitle || bill.title || "Utility Bill"}</td>
+                {/* <td>{bill.billTitle || bill.title || "Utility Bill"}</td> */}
                 <td>{bill.username || "N/A"}</td>
                 <td>{bill.phone || "N/A"}</td>
                 <td>{bill.email || user.email}</td>

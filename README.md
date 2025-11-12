@@ -7,9 +7,13 @@ Users can register/login (email & Google), pay **current-month** bills, view the
 
 ## Demo / Links
 
-- **Live site:** https://utility-bill-management.netlify.app/
+[Live Demo](https://utility-bill-management.netlify.app/)
+[Client Repo](https://github.com/ziaullhaque/utility-bill-management-client.git)
+[Server Repo](https://github.com/ziaullhaque/utility-bill-management-server.git)
+
+<!-- - **Live site:** https://utility-bill-management.netlify.app/
 - **Client repo:** https://github.com/ziaullhaque/utility-bill-management-client.git
-- **Server repo:** https://github.com/ziaullhaque/utility-bill-management-server.git
+- **Server repo:** https://github.com/ziaullhaque/utility-bill-management-server.git -->
 
 ---
 

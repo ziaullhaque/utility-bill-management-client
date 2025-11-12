@@ -11,6 +11,7 @@ import MyLink from "../MyLink/MyLink";
 
 const NavBar = () => {
   const { user, logout } = useContext(AuthContext);
+  console.log(user);
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
   const [showNavbar, setShowNavbar] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
@@ -215,7 +216,7 @@ const NavBar = () => {
                   alt="Tailwind CSS Navbar component"
                   referrerPolicy="no-referrer"
                   src={
-                    user.photoURL ||
+                    user?.photoURL ||
                     "https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
                   }
                 />
@@ -226,8 +227,8 @@ const NavBar = () => {
               className="menu  menu-sm dropdown-content bg-base-100 rounded-box z-50 mt-3 w-52 p-2 shadow"
             >
               <div className=" pb-3 border-b border-b-gray-200 text-center">
-                <li className="text-sm font-bold">{user.displayName}</li>
-                <li className="text-xs">{user.email}</li>
+                <li className="text-sm font-bold">{user?.displayName}</li>
+                <li className="text-xs">{user?.email}</li>
               </div>
               <li className="mt-3">
                 <Link to={"/profile"}>

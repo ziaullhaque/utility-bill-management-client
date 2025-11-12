@@ -45,7 +45,7 @@ const AddBill = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#E8E4FF] via-[#F4F2FF] to-[#FCFBFF] dark:from-[#111827] dark:via-[#1F2937] dark:to-[#111827] transition-colors duration-500 p-6">
+    <div className="flex items-center justify-center bg-gradient-to-br from-[#E8E4FF] via-[#F4F2FF] to-[#FCFBFF] dark:from-[#111827] dark:via-[#1F2937] dark:to-[#111827] transition-colors duration-500 p-6 mt-16">
       <motion.div
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
@@ -178,7 +178,7 @@ const AddBill = () => {
 
 export default AddBill;
 
-// Without dark 
+// Without dark
 // import React, { useContext } from "react";
 // import Swal from "sweetalert2";
 // import { motion } from "framer-motion";

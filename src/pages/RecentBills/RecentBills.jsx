@@ -35,7 +35,7 @@ const RecentBills = () => {
   };
 
   return (
-    <section className="py-16 px-6 lg:px-20 min-h-screen bg-gradient-to-br from-[#F9F8FF] via-[#F1EEFF] to-[#E8E4FF] dark:from-[#111827] dark:via-[#1F2937] dark:to-[#111827] transition-colors duration-500">
+    <section className="py-16 px-6 lg:px-20  bg-gradient-to-br from-[#F9F8FF] via-[#F1EEFF] to-[#E8E4FF] dark:from-[#111827] dark:via-[#1F2937] dark:to-[#111827] transition-colors duration-500">
       <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-800 dark:text-gray-100 mb-10">
         Recent Utility Bills
       </h2>
@@ -67,9 +67,9 @@ const RecentBills = () => {
                   <h3 className="text-xl font-bold mb-2 text-gray-800 dark:text-gray-100 group-hover:text-[#4B1CCB] transition-colors duration-200">
                     {bill.title}
                   </h3>
-                  <p className="text-gray-600 dark:text-gray-300 text-sm mb-3 line-clamp-2">
+                  {/* <p className="text-gray-600 dark:text-gray-300 text-sm mb-3 line-clamp-2">
                     {bill.description}
-                  </p>
+                  </p> */}
                   <div className="flex items-center text-gray-500 dark:text-gray-400 text-sm gap-2 mb-1">
                     <FaMapMarkerAlt className="text-[#4B1CCB]" />
                     {bill.location}

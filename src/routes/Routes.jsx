@@ -8,6 +8,7 @@ import PrivateRoute from "../Private/PrivateRoute";
 import Bills from "../pages/Bills/Bills";
 import BillDetails from "../pages/BillDetails/BillDetails";
 import AddBill from "../pages/AddBill/AddBill";
+import Profile from "../pages/Profile/Profile";
 
 export const router = createBrowserRouter([
   {
@@ -35,6 +36,14 @@ export const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <MyBills></MyBills>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/profile",
+        element: (
+          <PrivateRoute>
+            <Profile></Profile>
           </PrivateRoute>
         ),
       },

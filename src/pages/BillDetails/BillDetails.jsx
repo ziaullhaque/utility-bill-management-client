@@ -69,7 +69,10 @@ const BillDetails = () => {
       address: form.address.value,
       date: form.date.value,
       info: form.info.value,
+      phone: phone,
     };
+
+    console.log(paymentInfo);
 
     fetch("https://utility-bill-management.vercel.app/payments", {
       method: "POST",
@@ -271,6 +274,7 @@ const BillDetails = () => {
               />
               <input
                 name="phone"
+                
                 placeholder="Phone Number"
                 required
                 className="input input-bordered w-full"

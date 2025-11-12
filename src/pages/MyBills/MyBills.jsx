@@ -96,7 +96,7 @@ const MyBills = () => {
       <input id="swal-amount" class="swal2-input" readOnly type="number" placeholder="Amount" value="${
         bill.amount || ""
       }">
-      <input id="swal-date" class="swal2-input" type="date" value="${
+      <input id="swal-date" class="swal2-input" readOnly type="date" value="${
         bill.date ? new Date(bill.date).toISOString().split("T")[0] : ""
       }">
     `,

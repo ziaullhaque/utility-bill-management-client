@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router";
-import { FaFacebook, FaTwitter, FaInstagram } from "react-icons/fa";
+import { FaFacebookSquare, FaInstagram } from "react-icons/fa";
+import { FaSquareXTwitter } from "react-icons/fa6";
 
 const Footer = () => {
   return (
@@ -55,10 +56,10 @@ const Footer = () => {
           <p className="text-sm mb-3">Phone: +880 1234 567 890</p>
           <div className="flex gap-4 text-xl">
             <a href="#" className="hover:text-[#7A6AE0] transition">
-              <FaFacebook />
+              <FaFacebookSquare />
             </a>
             <a href="#" className="hover:text-[#7A6AE0] transition">
-              <FaTwitter />
+              <FaSquareXTwitter />
             </a>
             <a href="#" className="hover:text-[#7A6AE0] transition">
               <FaInstagram />

@@ -104,6 +104,7 @@ const Category = () => {
 
 export default Category;
 
+// Without dark 
 // import React from "react";
 // import { FaBolt, FaGasPump, FaTint, FaWifi } from "react-icons/fa";
 

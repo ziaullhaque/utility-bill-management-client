@@ -63,6 +63,7 @@ const BillDetails = () => {
 
     const paymentInfo = {
       email: form.email.value,
+      title: form.title.value,
       billId: form.billId.value,
       amount: form.amount.value,
       username: form.username.value,
@@ -238,6 +239,13 @@ const BillDetails = () => {
             <h3 className="font-bold text-2xl text-center text-[#4B1CCB] mb-5">
               Pay Your Bill
             </h3>
+            <input
+              name="title"
+              defaultValue={bill.title}
+              readOnly
+              placeholder="Tile"
+              className="input input-bordered w-full mb-3"
+            />
             <form onSubmit={handlePaySubmit} className="space-y-4">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <input
@@ -274,7 +282,6 @@ const BillDetails = () => {
               />
               <input
                 name="phone"
-                
                 placeholder="Phone Number"
                 required
                 className="input input-bordered w-full"

@@ -8,6 +8,7 @@ import { FaFilePdf } from "react-icons/fa";
 const MyBills = () => {
   const { user } = useContext(AuthContext);
   const [payments, setPayments] = useState([]);
+  // const [bill, setBill] = useState(null);
   const [loading, setLoading] = useState(true);
 
   // fetch payments
@@ -34,7 +35,7 @@ const MyBills = () => {
     doc.text("Utility Bill Receipt", 70, 20);
 
     doc.setFontSize(12);
-    doc.text(`Bill ID: ${bill.billsId || "N/A"}`, 20, 40);
+    doc.text(`Bill ID: ${bill.billId || "N/A"}`, 20, 40);
     doc.text(`Bill Title: ${bill.billTitle || "Utility Bill"}`, 20, 50);
     doc.text(`Amount: ${bill.amount} `, 20, 60);
     doc.text(`Date: ${new Date(bill.date).toLocaleDateString()}`, 20, 70);
@@ -195,15 +196,15 @@ const MyBills = () => {
       "Title",
       "Username",
       "Phone",
-      "Amount (৳)",
+      "Amount",
       "Date",
       "Address",
     ];
 
     const rows = payments.map((b, i) => [
       i + 1,
-      b.billsId || "N/A",
-      b.billTitle || "Utility Bill",
+      b.billId || "N/A",
+      b.billTitle || b.title || "Utility Bill",
       b.username || "N/A",
       b.phone || "N/A",
       b.amount || "N/A",
@@ -230,11 +231,7 @@ const MyBills = () => {
       14,
       doc.lastAutoTable.finalY + 10
     );
-    doc.text(
-      `Total Amount: ৳${totalAmount}`,
-      14,
-      doc.lastAutoTable.finalY + 20
-    );
+    doc.text(`Total Amount: ${totalAmount}`, 14, doc.lastAutoTable.finalY + 20);
     doc.text(
       "Thank you for using Utility Bill System!",
       60,
@@ -290,6 +287,8 @@ const MyBills = () => {
           <thead className="bg-base-200">
             <tr className="text-sm text-gray-700">
               <th>#</th>
+              {/* <th>Bill ID</th> */}
+              <th>Title</th>
               <th>Username</th>
               <th>Phone</th>
               <th>Email</th>
@@ -304,6 +303,8 @@ const MyBills = () => {
             {payments.map((bill, i) => (
               <tr key={bill._id} className="hover:bg-base-200 transition-all">
                 <td>{i + 1}</td>
+                {/* <td>{bill.billId || "N/A"}</td> */}
+                <td>{bill.billTitle || bill.title || "Utility Bill"}</td>
                 <td>{bill.username || "N/A"}</td>
                 <td>{bill.phone || "N/A"}</td>
                 <td>{bill.email || user.email}</td>

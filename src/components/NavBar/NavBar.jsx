@@ -1,17 +1,27 @@
 import React, { useContext, useEffect, useState } from "react";
-import { GoHomeFill } from "react-icons/go";
-import { ImBoxAdd } from "react-icons/im";
 import { Link } from "react-router";
 import { AuthContext } from "../../contexts/AuthContext";
-import { FaSun, FaMoon } from "react-icons/fa";
+import {
+  FaSun,
+  FaMoon,
+  FaHome,
+  FaInfoCircle,
+  FaHeadset,
+  FaFileInvoiceDollar,
+  FaPlusCircle,
+  FaClipboardList,
+} from "react-icons/fa";
 import { IoLogIn, IoLogOut } from "react-icons/io5";
-import { FaDownload, FaGear, FaUser } from "react-icons/fa6";
-import { FaUserPlus } from "react-icons/fa";
+import { FaUser } from "react-icons/fa6";
 import MyLink from "../MyLink/MyLink";
+import icon from "../../assets/icon.png";
+import { MdOutlineDashboard } from "react-icons/md";
 
 const NavBar = () => {
-  const { user, logout } = useContext(AuthContext);
-  console.log(user);
+  const { user, logout, loading } = useContext(AuthContext);
+
+  const isVerifiedUser = user && user.emailVerified;
+
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
   const [showNavbar, setShowNavbar] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
@@ -26,7 +36,7 @@ const NavBar = () => {
     setTheme(checked ? "dark" : "light");
   };
 
-  // scroll navbar
+  // scroll navbar hide/show
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > lastScrollY) setShowNavbar(false);
@@ -38,86 +48,88 @@ const NavBar = () => {
   }, [lastScrollY]);
 
   const handleSignOut = () => {
-    logout()
-      .then(() => console.log("User signed out"))
-      .catch((error) => console.error("Sign out error:", error));
+    logout().catch(console.error);
   };
+
+  if (loading) return null; // navbar flicker বন্ধ
 
   return (
     <div
-      className={`navbar bg-base-100 shadow-sm px-5 fixed top-0 left-0 w-full z-50 transition-transform duration-500 ${
+      className={`navbar bg-gradient-to-r from-[#E3DFFF] to-[#F3F1FF] dark:from-[#1E1E2E] dark:to-[#2A2A3C] shadow-sm px-5 fixed top-0 left-0 w-full z-50 transition-transform duration-500 ${
         showNavbar ? "translate-y-0" : "-translate-y-full"
       }`}
     >
-      <div className="navbar-start ">
+      {/* START */}
+      <div className="navbar-start">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M4 6h16M4 12h8m-8 6h16"
-              />
-            </svg>
+            ☰
           </div>
-          <ul
-            tabIndex="-1"
-            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-10 mt-3 w-52 p-2 shadow"
-          >
-            {user ? (
-              <ul className="">
+
+          <ul className="menu menu-sm dropdown-content bg-base-100 rounded-box mt-3 w-52 p-2 shadow">
+            {isVerifiedUser ? (
+              <>
                 <li>
                   <MyLink to="/">
-                    <GoHomeFill />
-                    Home
+                    <FaHome /> Home
+                  </MyLink>
+                </li>
+                <li>
+                  <MyLink to="/about">
+                    <FaInfoCircle /> About
+                  </MyLink>
+                </li>
+                <li>
+                  <MyLink to="/help">
+                    <FaHeadset /> Support
                   </MyLink>
                 </li>
                 <li>
                   <MyLink to="/bills">
-                    <ImBoxAdd />
-                    Bills
+                    <FaFileInvoiceDollar /> Bills
                   </MyLink>
                 </li>
                 <li>
                   <MyLink to="/my-bills">
-                    <ImBoxAdd />
-                    My Bills
+                    <FaClipboardList /> My Bills
                   </MyLink>
                 </li>
                 <li>
                   <MyLink to="/add-bill">
-                    <ImBoxAdd />
-                    Add Bill
+                    <FaPlusCircle /> Add Bill
                   </MyLink>
                 </li>
-              </ul>
+              </>
             ) : (
-              <ul className="">
+              <>
                 <li>
                   <MyLink to="/">
-                    <GoHomeFill />
-                    Home
+                    <FaHome /> Home
+                  </MyLink>
+                </li>
+                <li>
+                  <MyLink to="/about">
+                    <FaInfoCircle /> About
+                  </MyLink>
+                </li>
+                <li>
+                  <MyLink to="/help">
+                    <FaHeadset /> Support
                   </MyLink>
                 </li>
                 <li>
                   <MyLink to="/bills">
-                    <ImBoxAdd />
-                    Bills
+                    <FaFileInvoiceDollar /> Bills
                   </MyLink>
                 </li>
-              </ul>
+              </>
             )}
           </ul>
         </div>
-        {/* logo */}
+
+        {/* LOGO */}
         <Link to="/" className="font-bold text-xl flex items-center gap-2">
+          <img className="w-[30px]" src={icon} alt="" />
           Utility
           <span className="bg-linear-to-r from-[#7A6AE0] to-[#9E8FF5] bg-clip-text text-transparent">
             Bills
@@ -125,154 +137,107 @@ const NavBar = () => {
         </Link>
       </div>
 
-      {/* center */}
+      {/* CENTER */}
       <div className="navbar-center hidden lg:flex">
-        <div>
-          <ul>
-            {user ? (
-              <ul className="menu menu-horizontal px-1 gap-10">
-                <li>
-                  <MyLink to="/">
-                    <GoHomeFill />
-                    Home
-                  </MyLink>
-                </li>
-                <li>
-                  <MyLink to="/bills">
-                    <ImBoxAdd />
-                    Bills
-                  </MyLink>
-                </li>
-                <li>
-                  <MyLink to="/my-bills">
-                    <ImBoxAdd />
-                    My Bills
-                  </MyLink>
-                </li>
-                <li>
-                  <MyLink to="/add-bill">
-                    <ImBoxAdd />
-                    Add Bill
-                  </MyLink>
-                </li>
-              </ul>
-            ) : (
-              <ul className="menu menu-horizontal px-1 gap-10">
-                <li>
-                  <MyLink to="/">
-                    <GoHomeFill />
-                    Home
-                  </MyLink>
-                </li>
-                <li>
-                  <MyLink to="/bills">
-                    <ImBoxAdd />
-                    Bills
-                  </MyLink>
-                </li>
-              </ul>
-            )}
-          </ul>
-        </div>
+        <ul className="menu menu-horizontal gap-10">
+          <li>
+            <MyLink to="/">
+              <FaHome /> Home
+            </MyLink>
+          </li>
+          <li>
+            <MyLink to="/about">
+              <FaInfoCircle /> About
+            </MyLink>
+          </li>
+          <li>
+            <MyLink to="/help">
+              <FaHeadset /> Support
+            </MyLink>
+          </li>
+          <li>
+            <MyLink to="/bills">
+              <FaFileInvoiceDollar /> Bills
+            </MyLink>
+          </li>
+
+          {isVerifiedUser && (
+            <>
+              <li>
+                <MyLink to="/my-bills">
+                  <FaClipboardList /> My Bills
+                </MyLink>
+              </li>
+              <li>
+                <MyLink to="/add-bill">
+                  <FaPlusCircle /> Add Bill
+                </MyLink>
+              </li>
+            </>
+          )}
+        </ul>
       </div>
 
-      {/* end */}
-      <div className="navbar-end gap-5">
-        <div className="flex items-center gap-2">
-          <label className="swap swap-rotate cursor-pointer">
-            {/* theme */}
-            <input
-              type="checkbox"
-              onChange={(e) => handleTheme(e.target.checked)}
-              checked={theme === "dark"}
-              className="hidden"
-            />
+      {/* END */}
+      <div className="navbar-end gap-4">
+        {/* THEME */}
+        <label className="swap swap-rotate cursor-pointer">
+          <input
+            type="checkbox"
+            checked={theme === "dark"}
+            onChange={(e) => handleTheme(e.target.checked)}
+            className="hidden"
+          />
+          <FaSun
+            className={`text-yellow-400 text-xl ${
+              theme === "light" ? "block" : "hidden"
+            }`}
+          />
+          <FaMoon
+            className={`text-gray-300 text-xl ${
+              theme === "dark" ? "block" : "hidden"
+            }`}
+          />
+        </label>
 
-            {/* light mode */}
-            <FaSun
-              className={`swap-off text-yellow-400 text-2xl transition-transform duration-500 ${
-                theme === "light" ? "rotate-0 scale-100" : "rotate-180 scale-0"
-              }`}
-            />
-
-            {/*dark mode */}
-            <FaMoon
-              className={`swap-on text-gray-300 text-2xl transition-transform duration-500 ${
-                theme === "dark" ? "rotate-0 scale-100" : "rotate-180 scale-0"
-              }`}
-            />
-          </label>
-        </div>
-
-        {user ? (
-          <div className="dropdown dropdown-end z-50">
-            <div
-              tabIndex={0}
-              role="button"
-              className="btn btn-ghost btn-circle avatar"
-            >
-              <div className="w-9 border-2 border-gray-300 rounded-full">
-                <img
-                  alt="Tailwind CSS Navbar component"
-                  referrerPolicy="no-referrer"
-                  src={
-                    user?.photoURL ||
-                    "https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
-                  }
-                />
+        {/* USER */}
+        {isVerifiedUser ? (
+          <div className="dropdown dropdown-end">
+            <div tabIndex={0} className="btn btn-ghost btn-circle avatar">
+              <div className="w-9 rounded-full border">
+                <img referrerPolicy="no-referrer" src={user.photoURL} alt="" />
               </div>
             </div>
-            <ul
-              tabIndex="-1"
-              className="menu  menu-sm dropdown-content bg-base-100 rounded-box z-50 mt-3 w-52 p-2 shadow"
-            >
-              <div className=" pb-3 border-b border-b-gray-200 text-center">
-                <li className="text-sm font-bold">{user?.displayName}</li>
-                <li className="text-xs">{user?.email}</li>
-              </div>
-              <li className="mt-3">
-                <Link to={"/profile"}>
+            <ul className="menu menu-sm dropdown-content bg-base-100 rounded-box mt-3 w-52 p-2 shadow">
+              <li className="text-center font-bold">{user.displayName}</li>
+              <li className="text-xs text-center">{user.email}</li>
+              <li className="mt-2">
+                <Link to="/profile">
                   <FaUser /> Profile
                 </Link>
               </li>
-              {/* <li className="">
-                <Link to={""}>
-                  <FaDownload />
-                  Download
+              <li className="mt-2">
+                <Link to="/dashboard">
+                  <MdOutlineDashboard /> Dashboard
                 </Link>
               </li>
-              <li className="mb-3">
-                <a>
-                  <FaGear /> Settings
-                </a>
-              </li> */}
               <li>
                 <button
                   onClick={handleSignOut}
-                  className="btn text-white hover:opacity-95 bg-gradient-to-r from-[#7A6AE0] to-[#9E8FF5] hover:from-[#6957DB] hover:to-[#8C7BF0]"
+                  className="btn bg-gradient-to-r from-[#7A6AE0] to-[#9E8FF5] text-white"
                 >
-                  <IoLogOut />
-                  Sign Out
+                  <IoLogOut /> Sign Out
                 </button>
               </li>
             </ul>
           </div>
         ) : (
-          <div className="flex">
-            {/* <Link
-              to="/register"
-              className="btn btn-outline border-[#9F62F2] text-[#632EE3] hover:bg-linear-to-r hover:from-[#632EE3] hover:to-[#9F62F2] hover:text-white "
-            >
-              <FaUserPlus /> Register
-            </Link> */}
-
-            <Link
-              to="/login"
-              className="btn bg-linear-to-r from-[#7A6AE0] to-[#9E8FF5] hover:from-[#6957DB] hover:to-[#8C7BF0] border-none text-white hover:opacity-90 ml-3"
-            >
-              <IoLogIn /> Login
-            </Link>
-          </div>
+          <Link
+            to="/login"
+            className="btn bg-linear-to-r from-[#7A6AE0] to-[#9E8FF5] border-none text-white"
+          >
+            <IoLogIn /> Login
+          </Link>
         )}
       </div>
     </div>

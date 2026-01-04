@@ -12,6 +12,8 @@ import Profile from "../pages/Profile/Profile";
 import Error from "../pages/Error/Error";
 import About from "../pages/About/About";
 import Help from "../pages/Help/Help";
+import DashboardLayout from "../layouts/DashboardLayout";
+import DashboardCharts from "../pages/Dashboard/DashboardCharts/DashboardCharts";
 
 export const router = createBrowserRouter([
   {
@@ -67,11 +69,46 @@ export const router = createBrowserRouter([
           </PrivateRoute>
         ),
       },
+
       {
         path: "/bill-details/:id",
         element: (
           <PrivateRoute>
             <BillDetails></BillDetails>
+          </PrivateRoute>
+        ),
+      },
+    ],
+  },
+  {
+    path: "/dashboard",
+    element: (
+      <PrivateRoute>
+        <DashboardLayout></DashboardLayout>
+      </PrivateRoute>
+    ),
+    children: [
+      {
+        index: true,
+        element: (
+          <PrivateRoute>
+            <DashboardCharts></DashboardCharts>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/dashboard",
+        element: (
+          <PrivateRoute>
+            <DashboardCharts></DashboardCharts>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/dashboard/profile",
+        element: (
+          <PrivateRoute>
+            <Profile></Profile>
           </PrivateRoute>
         ),
       },

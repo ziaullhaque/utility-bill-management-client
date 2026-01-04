@@ -5,6 +5,7 @@ import {
   createUserWithEmailAndPassword,
   GoogleAuthProvider,
   onAuthStateChanged,
+  sendEmailVerification,
   sendPasswordResetEmail,
   signInWithEmailAndPassword,
   signInWithPopup,
@@ -18,67 +19,62 @@ const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  // Register user
-  const register = (email, password) => {
-    setLoading(true);
-    return createUserWithEmailAndPassword(auth, email, password);
+  const register = (email, password) =>
+    createUserWithEmailAndPassword(auth, email, password);
+
+  const login = (email, password) =>
+    signInWithEmailAndPassword(auth, email, password);
+
+  const signInWithGoogle = () => signInWithPopup(auth, googleProvider);
+
+  const emailVerificationFunction = (user) => {
+    if (!user) return;
+    return sendEmailVerification(user);
   };
 
-  // Login user
-  const login = (email, password) => {
-    setLoading(true);
-    return signInWithEmailAndPassword(auth, email, password);
+  const logout = async () => {
+    await signOut(auth);
+    setUser(null);
   };
 
-  // Login user in Google
-  const signInWithGoogle = () => {
-    setLoading(true);
-    return signInWithPopup(auth, googleProvider);
-  };
-
-  // Logout
-  const logout = () => {
-    setLoading(true);
-    return signOut(auth);
-  };
-  // Reset Password
-  const resetPassword = (email) => {
-    setLoading(true);
-    return sendPasswordResetEmail(auth, email);
-  };
+  const resetPassword = (email) => sendPasswordResetEmail(auth, email);
 
   const updateUserProfile = async (name, photoURL) => {
     if (!auth.currentUser) return;
     await updateProfile(auth.currentUser, {
       displayName: name,
-      photoURL: photoURL,
+      photoURL,
     });
-    // state update
     setUser({ ...auth.currentUser });
   };
 
-  // Observe user
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
       setLoading(false);
     });
-    return () => unsubscribe();
+    return unsubscribe;
   }, []);
 
-  const authInfo = {
-    user,
-    loading,
-    setUser,
-    setLoading,
-    register,
-    login,
-    logout,
-    resetPassword,
-    signInWithGoogle,
-    updateUserProfile,
-  };
-  return <AuthContext value={authInfo}>{children}</AuthContext>;
+  return (
+    <AuthContext
+      value={{
+        user,
+        loading,
+        setUser,
+        setLoading,
+        register,
+        login,
+        logout,
+        resetPassword,
+        signInWithGoogle,
+        updateUserProfile,
+        emailVerificationFunction,
+      }}
+    >
+      {children}
+    </AuthContext>
+  );
 };
 
 export default AuthProvider;
